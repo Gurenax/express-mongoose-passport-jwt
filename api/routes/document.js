@@ -1,10 +1,11 @@
 const express = require('express')
 const Document = require('../models/Document')
+const authMiddleware = require('../middleware/auth')
 
 const router = express.Router()
 
 // GET - Read all document
-router.get('/documents', (req, res) => {
+router.get('/documents', authMiddleware.requireJWT, (req, res) => {
   Document.find()
   // Once it has loaded these documents
   .then(documents => {
@@ -17,7 +18,7 @@ router.get('/documents', (req, res) => {
 })
 
 // GET - Read an individual document document
-router.get('/documents/:id', (req, res) => {
+router.get('/documents/:id', authMiddleware.requireJWT, (req, res) => {
   const id = req.params.id
   // Ask the model for the document with this id
   Document.findById(id)
@@ -39,7 +40,7 @@ router.get('/documents/:id', (req, res) => {
 })
 
 // POST - Create a new document document
-router.post('/documents', (req, res) => {
+router.post('/documents', authMiddleware.requireJWT, (req, res) => {
   const attributes = req.body
   Document.create(attributes)
     .then(document => {
@@ -51,7 +52,7 @@ router.post('/documents', (req, res) => {
 })
 
 // PATCH - Update a document document
-router.patch('/documents/:id', (req, res) => {
+router.patch('/documents/:id', authMiddleware.requireJWT, (req, res) => {
   const id = req.params.id
   const attributes = req.body
   Document.findByIdAndUpdate(id, attributes, { new: true, runValidators: true })
@@ -71,7 +72,7 @@ router.patch('/documents/:id', (req, res) => {
 })
 
 // DELETE - Destroy a document document
-router.delete('/documents/:id', (req, res) => {
+router.delete('/documents/:id', authMiddleware.requireJWT, (req, res) => {
   const id = req.params.id
   Document.findByIdAndRemove(id)
     .then(document => {
