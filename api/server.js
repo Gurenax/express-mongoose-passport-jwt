@@ -8,6 +8,7 @@ server.use(bodyParser.json())
 
 // Routes
 server.use('/', [
+  require('./routes/auth'),
   require('./routes/document')
 ])
 
