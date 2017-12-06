@@ -116,3 +116,19 @@ Document.deleteMany().then(() => {
 })
 ```
 
+11. Create `routes\document.js` using boilerplate (or run `Skafold Document` with Skafold app)
+
+12. Add route for document in server.js
+```javascript
+// Routes
+server.use('/', [
+  require('./routes/document')
+])
+```
+
+13. Create `check\1.http` and test the app
+```
+GET http://localhost:7000/document
+```
+
+14. 
