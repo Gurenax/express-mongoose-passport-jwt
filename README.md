@@ -319,3 +319,38 @@ router.get('/documents', authMiddleware.requireJWT, (req, res) => {
   })
 })
 ```
+
+23. Update `check\1.http` and test the auth routes
+```
+### Registration
+POST http://localhost:7000/auth/register
+Content-Type: application/json
+
+{
+  "email": "glenn.dimaliwat@gmailcom",
+  "firstName": "Glenn",
+  "lastName" : "Dimaliwat",
+  "password" : "password123"
+}
+
+### Sign In
+POST http://localhost:7000/auth/
+Content-Type: application/json
+
+{
+  "email": "glenn.dimaliwat@gmailcom",
+  "password" : "password123"
+}
+```
+
+24. Also in `check\1.http`, Copy the token after successful sign in and test the product routes with JWT authentication
+```
+###
+
+GET http://localhost:7000/documents
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdsZW5uLmRpbWFsaXdhdEBnbWFpbGNvbSIsImlhdCI6MTUxMjU2MzQ1MCwiZXhwIjoxNTEzMTY4MjUwLCJzdWIiOiI1YTI3ZTJhNTI0NjQ1NTFlYTAyOTE1YzQifQ.QKQLXZgcYNS_57E9fm4C12IAKUXnN9hChmkD36PrZi4
+
+###
+GET http://localhost:7000/documents/5a27db9a6c728b182aa14b41
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdsZW5uLmRpbWFsaXdhdEBnbWFpbGNvbSIsImlhdCI6MTUxMjU2MzQ1MCwiZXhwIjoxNTEzMTY4MjUwLCJzdWIiOiI1YTI3ZTJhNTI0NjQ1NTFlYTAyOTE1YzQifQ.QKQLXZgcYNS_57E9fm4C12IAKUXnN9hChmkD36PrZi4
+```
