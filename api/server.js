@@ -8,7 +8,7 @@ server.use(bodyParser.json())
 
 // Routes
 server.use('/', [
-  // require('./routes/whatever')
+  require('./routes/document')
 ])
 
 // Start the server
