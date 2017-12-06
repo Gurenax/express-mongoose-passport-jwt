@@ -160,7 +160,10 @@ const User = mongoose.model('User', userSchema)
 module.exports = User
 ```
 
-17. Add helper for middleware `middleware\auth.js`  
+17. Generate a jwtSecret token using console  
+`openssl rand -base64 48`
+
+18. Add helper for middleware `middleware\auth.js`  
 ```javascript
 const passport = require('passport')
 const JWT = require('jsonwebtoken')
@@ -259,7 +262,7 @@ module.exports = {
 }
 ```
 
-18. Add route for auth (`routes\auth.js`)
+19. Add route for auth (`routes\auth.js`)
 ```javascript
 const express = require('express')
 const authMiddleware = require('../middleware/auth')
@@ -287,7 +290,7 @@ router.post(
 module.exports = router
 ```
 
-19. Add route for auth in server.js
+20. Add route for auth in server.js
 ```javascript
 // Routes
 server.use('/', [
@@ -296,12 +299,12 @@ server.use('/', [
 ])
 ```
 
-20. Update document route to use JWT middleware
+21. Update document route to use JWT middleware
 ```javascript
 const authMiddleware = require('../middleware/auth')
 ```
 
-21. Add `authMiddleware.requireJWT` as 2nd argument to every route (see example below)
+22. Add `authMiddleware.requireJWT` as 2nd argument to every route (see example below)
 ```javascript
 // GET - Read all document
 router.get('/documents', authMiddleware.requireJWT, (req, res) => {
